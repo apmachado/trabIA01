@@ -67,13 +67,81 @@ public class Tabuleiro {
             }
         }
     }
+    public int nPecasJogador(int time){   
+        List<Peca> pecas = getPecasJogador(time);
+        
+        return pecas.size();
+    }
+    public Peca getPeca(Posicao posicao) {
+        return tabuleiro[posicao.getI()][posicao.getJ()];
+    }
+    
+    public Posicao getPosicao(Peca peca) {
+        for (int i = 0; i < DIMEN; i++) {
+            for (int j = 0; j < DIMEN; j++) {
+                if (tabuleiro[i][j] != null) {
+                    if (tabuleiro[i][j].equals(peca)) {
+                        return new Posicao(i, j);
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+    public void movePeca(Peca peca, Posicao posFinal) {
+        Posicao posAtual = getPosicao(peca);
+
+        tabuleiro[posAtual.getI()][posAtual.getJ()] = null;
+
+        tabuleiro[posFinal.getI()][posFinal.getJ()] = peca;
+    }
+    public void removePeca(Peca peca) {
+        Posicao posAtual = getPosicao(peca);
+
+        tabuleiro[posAtual.getI()][posAtual.getJ()] = null;
+    }
+    public boolean posValida(Posicao pos) {
+        if (pos.getI() >= 8 || pos.getJ() >= 8) {
+            return false;
+        }
+
+        if (pos.getI() < 0 || pos.getJ() < 0) {
+            return false;
+        }
+
+        return true;
+    }
+    public boolean existePecaPos(Posicao pos) {
+        return getPeca(pos) != null;
+    }
+    public List<Peca> getPecas() {
+        List<Peca> pecas = new ArrayList<>();
+        for (int i = 0; i < DIMEN; i++) {
+            for (int j = 0; j < DIMEN; j++) {
+                Peca peca = getPeca(new Posicao(i, j));
+                if (peca != null) {
+                    pecas.add(peca);
+                }
+            }
+        }
+
+        return pecas;
+    }
+    public List<Peca> getPecasJogador(int time){
+        List<Peca> pecas = new ArrayList<>();
+
+        for (int i = 0; i < DIMEN; i++) {
+            for (int j = 0; j < DIMEN; j++) {
+                Peca peca = getPeca(new Posicao(i, j));
+                if (peca != null) {
+                    if(peca.getTime() == time){
+                        pecas.add(peca);
+                    }
+                }
+            }
+        }
+
+        return pecas;
+    }
 }
-/*
-moverpecas
-removerpecas
-numero de pecas
-pegar peça
-pegar posição
-verificar posiçao valida
-verificar se existe peça
-*/
