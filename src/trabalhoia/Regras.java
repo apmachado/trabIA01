@@ -20,11 +20,6 @@ public class Regras {
     private Tabuleiro tabuleiro = new Tabuleiro();
 
     /**
-     * Turno atual do jogo.
-     */
-    private int turnoAtual = 0;
-
-    /**
      * Identificadores dos jogadores.
      */
     public static final int JOGADOR_UM = 1;
@@ -70,10 +65,26 @@ public class Regras {
      * @return 
      */
     boolean validaPosicaoInicial(Tabuleiro tab, Posicao pos,int time) {
+        if(!tab.posValida(pos)){
+            System.out.println("posicao invalida");
+            return false;
+        }
+        if(!tab.existePecaPos(pos) || !(tab.getPeca(pos).getTime()==time)){
+            System.out.println("nem tem uma peca sua nessa posicao");
+            return false;
+        }
         return true;
     }
 
     boolean validaMovimento(Tabuleiro tab, Posicao posInicial, Posicao posFinal, int time) {
+        if(!tab.posValida(posFinal)){
+            System.out.println("posicao invalida");
+            return false;
+        }
+        if(tab.existePecaPos(posFinal)){
+            System.out.println("Eieiei já tem uma peca aqui");
+            return false;
+        }
         return true;
     }
     
