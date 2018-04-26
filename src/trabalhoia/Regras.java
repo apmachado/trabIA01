@@ -53,4 +53,33 @@ public class Regras {
     verificar se existe captura
     realizar jogada
     */
+    /**
+     * funcao que verifica se o jogo terminou
+     * retorna 0 caso nao tenha terminado
+     * retorna o jogador vencedor caso tenha terminado
+     */
+    int jogoTerminou(Tabuleiro tab) {
+        
+        return 0;
+    }
+    /**
+     * 
+     * @param tab
+     * @param pos
+     * @param time
+     * @return 
+     */
+    boolean validaPosicaoInicial(Tabuleiro tab, Posicao pos,int time) {
+        return true;
+    }
+
+    boolean validaMovimento(Tabuleiro tab, Posicao posInicial, Posicao posFinal, int time) {
+        return true;
+    }
+    
+    void realizaMovimento(Tabuleiro tab, Posicao posInicial, Posicao posFinal,int time){
+        System.out.println("regra ta falando que eh a vez do time " + time);
+        Peca peca = tab.getPeca(posInicial);
+        tab.movePeca(peca, posFinal);
+    }
 }
