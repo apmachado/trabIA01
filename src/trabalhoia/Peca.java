@@ -31,8 +31,8 @@ public class Peca {
         return time;
     }
     
-    public void setDama(boolean dama){
-        this.dama = dama;
+    public void setDama(){
+        this.dama = true;
     }
     
     public boolean isDama(){
