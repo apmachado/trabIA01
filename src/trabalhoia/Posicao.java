@@ -35,4 +35,8 @@ public class Posicao {
         return (this.i == pos.i) && (this.j == pos.j);
     }
     
+      public String toString(){
+        return "[" + String.valueOf(i) + ";" + String.valueOf(j) + "]";
+    }
+    
 }

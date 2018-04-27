@@ -7,6 +7,7 @@ package trabalhoia;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -66,6 +67,19 @@ public class Regras {
             System.out.println("nem tem uma peca sua nessa posicao");
             return false;
         }
+        ArrayList<Jogada> possiveisJogadas = possiveisJogadasPeca(tab, tab.getPeca(pos));
+          if(possiveisJogadas.isEmpty()){
+            System.out.println("Nao existe movimento valido para essa peca,escolhe outra");
+            return false;
+        }
+        System.out.println("Sugestao de Jogadas");
+        Jogada jogada;
+        Posicao sugest;
+        for(int k = 0; k<possiveisJogadas.size(); k++){
+            jogada = possiveisJogadas.get(k);
+            sugest = jogada.getPosFinal();
+            System.out.println(sugest.toString());
+        }
         /*se existe possibilidade de captura no turno,
         só pecas que possuem captura podem ser selecionadas*/
         if(existePossibilidadeDeCaptura(tab, time)){
@@ -85,7 +99,6 @@ public class Regras {
             return null;
         }
         ArrayList<Jogada> possiveisJogadas = possiveisJogadasPeca(tab, tab.getPeca(posInicial));
-        
         for(Jogada jog : possiveisJogadas){
             if(jog.getPosFinal().getI()==posFinal.getI() && jog.getPosFinal().getJ()==posFinal.getJ()){
                 return jog;

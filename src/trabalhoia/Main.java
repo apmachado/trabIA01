@@ -6,6 +6,7 @@
 package trabalhoia;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -39,12 +40,14 @@ public class Main {
             System.out.println("Escolha a peca que deseja mover (i j)");
             i=s.nextInt();j=s.nextInt();
             posInicial = new Posicao(i,j);
-
             }while(!regras.validaPosicaoInicial(tab, posInicial, time));
             do{
             System.out.println("Faca sua jogada (i j)");
                 i=s.nextInt();j=s.nextInt();
                 posFinal = new Posicao(i,j);
+                if(regras.validaMovimento(tab, posInicial, posFinal, time) == null){
+                    System.out.println("Jogada inválida, tenta de novo");
+                }
             }while(regras.validaMovimento(tab, posInicial, posFinal, time)==null);
             Jogada jogada = regras.validaMovimento(tab, posInicial, posFinal, time);
             regras.realizaMovimento(tab, jogada);          

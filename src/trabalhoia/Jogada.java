@@ -61,4 +61,11 @@ public class Jogada {
     public void setPosFinal(Posicao posFinal) {
         this.posFinal = posFinal;
     }
+    
+        public String toString() {
+        String posCapturada = pecaCapturada == null ? "null" : pecaCapturada.toString();
+        String posMovida = pecaMovida == null ? "null" : pecaMovida.toString();
+        return "Jogada{" + "pecaCapturada=" + posCapturada + ", pecaMovida=" + posMovida + ", posInicial=" + posInicial.toString() + ", posFinal=" + posFinal.toString() + '}';
+    }
+
 }
