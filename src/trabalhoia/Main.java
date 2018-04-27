@@ -10,9 +10,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void desenhaTabuleiro(Tabuleiro tab){
         int n;
         for(int i=0; i< tab.DIMEN; i++){
@@ -47,8 +45,9 @@ public class Main {
             System.out.println("Faca sua jogada (i j)");
                 i=s.nextInt();j=s.nextInt();
                 posFinal = new Posicao(i,j);
-            }while(!regras.validaMovimento(tab, posInicial, posFinal, time));
-            regras.realizaMovimento(tab, posInicial, posFinal, time);          
+            }while(regras.validaMovimento(tab, posInicial, posFinal, time)==null);
+            Jogada jogada = regras.validaMovimento(tab, posInicial, posFinal, time);
+            regras.realizaMovimento(tab, jogada);          
     }
     
     public static int playerVsPlayer(Tabuleiro tab, Regras regras){
