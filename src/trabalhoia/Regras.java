@@ -66,6 +66,8 @@ public class Regras {
             System.out.println("nem tem uma peca sua nessa posicao");
             return false;
         }
+        /*se existe possibilidade de captura no turno,
+        só pecas que possuem captura podem ser selecionadas*/
         if(existePossibilidadeDeCaptura(tab, time)){
             ArrayList<Jogada> jogadas = possiveisJogadasPeca(tab, tab.getPeca(pos));
             return jogadas.stream().anyMatch((jog) -> (jog.houveCaptura()));
@@ -82,23 +84,8 @@ public class Regras {
             System.out.println("Eieiei já tem uma peca aqui");
             return null;
         }
-        Jogada jogada = new Jogada();
-        jogada.setPosInicial(posInicial);
-        jogada.setPosFinal(posFinal);
-        jogada.setPecaMovida(tab.getPeca(posInicial));
-        
-        if(posInicial.getI()-posFinal.getI()==2 ||posInicial.getI()-posFinal.getI()==-2){
-            Posicao pos = new Posicao(posInicial.getI()+posFinal.getI()/2, posInicial.getJ()+posFinal.getJ()/2);
-            Peca pecaCapturada = tab.getPeca(pos);
-            jogada.setPecaCapturada(pecaCapturada);
-        }
-        
         ArrayList<Jogada> possiveisJogadas = possiveisJogadasPeca(tab, tab.getPeca(posInicial));
-        /*É obrigado a comer*/
-        for(Jogada jog : possiveisJogadas){
-            if(jog.houveCaptura()&& !jogada.houveCaptura())
-                return null; 
-        }
+        
         for(Jogada jog : possiveisJogadas){
             if(jog.getPosFinal().getI()==posFinal.getI() && jog.getPosFinal().getJ()==posFinal.getJ()){
                 return jog;
@@ -107,7 +94,13 @@ public class Regras {
         
         return null;
     }
-    
+    /**
+     * Retorna as possiveis jogadas de uma peca. Se existir possibilidade de captura
+     * só as capturas serão retornadas
+     * @param tab
+     * @param peca
+     * @return 
+     */
     ArrayList<Jogada> possiveisJogadasPeca(Tabuleiro tab, Peca peca){
         Posicao posicaoPeca = tab.getPosicao(peca);
         ArrayList<Jogada> possiveisJogadas = new ArrayList<>();
@@ -131,6 +124,7 @@ public class Regras {
                 possiveisJogadas.add(jogada);
             }
         }
+        /*se existe captura, não adiciona mais jogadas*/
         if(!possiveisJogadas.isEmpty())
             return possiveisJogadas;
         
@@ -157,6 +151,12 @@ public class Regras {
             tab.removePeca(jogada.getPecaCapturada());
     }
     
+    /**
+     * Verifica se existe possibilidade de captura no turno. Funçao necessaria para validar posicao inicial
+     * @param tab
+     * @param time
+     * @return 
+     */
     boolean existePossibilidadeDeCaptura(Tabuleiro tab, int time){
         Posicao pos;
         ArrayList<Jogada> possiveisJogadas = new ArrayList<>();
