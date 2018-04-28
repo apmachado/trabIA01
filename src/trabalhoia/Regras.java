@@ -114,7 +114,14 @@ public class Regras {
      * @param peca
      * @return 
      */
+    
     ArrayList<Jogada> possiveisJogadasPeca(Tabuleiro tab, Peca peca){
+        if(peca.isDama())
+            return possiveisJogadasDama(tab, peca);
+        return possiveisJogadasPecaNormal(tab, peca);
+    }
+    
+    ArrayList<Jogada> possiveisJogadasPecaNormal(Tabuleiro tab, Peca peca){
         Posicao posicaoPeca = tab.getPosicao(peca);
         ArrayList<Jogada> possiveisJogadas = new ArrayList<>();
         
@@ -151,6 +158,71 @@ public class Regras {
         }
 
         return possiveisJogadas;
+    }
+    
+    ArrayList<Jogada> possiveisJogadasDama(Tabuleiro tab, Peca peca){
+        Posicao posicaoPeca = tab.getPosicao(peca);
+        ArrayList<Jogada> possiveisJogadas = new ArrayList<>();
+        ArrayList<Jogada> possiveisCapturas = new ArrayList<>();
+        
+        Posicao esquerdaCima = new Posicao(posicaoPeca.getI() -1, posicaoPeca.getJ() -1);
+        Posicao direitaCima = new Posicao(posicaoPeca.getI() -1, posicaoPeca.getJ() +1);
+        Posicao esquerdaBaixo = new Posicao(posicaoPeca.getI() +1, posicaoPeca.getJ() -1);
+        Posicao direitaBaixo = new Posicao(posicaoPeca.getI() +1, posicaoPeca.getJ() +1);
+        
+        
+        while(tab.posValida(esquerdaCima) && !tab.existePecaPos(esquerdaCima)){
+            Jogada jogada = new Jogada(null, peca, posicaoPeca, esquerdaCima);
+            possiveisJogadas.add(jogada);
+            esquerdaCima = new Posicao(esquerdaCima.getI() -1, esquerdaCima.getJ() -1);
+        }
+        if(tab.posValida(esquerdaCima) && tab.existePecaPos(esquerdaCima)&& tab.getPeca(esquerdaCima).getTime()!= peca.getTime()){
+            Posicao comidaEsquerda = new Posicao(esquerdaCima.getI() -1, esquerdaCima.getJ() -1);
+            if(tab.posValida(comidaEsquerda) && !tab.existePecaPos(comidaEsquerda)){
+                Jogada jogada = new Jogada(tab.getPeca(esquerdaCima), peca, posicaoPeca, comidaEsquerda);
+                possiveisCapturas.add(jogada);
+            }
+        }
+        while(tab.posValida(esquerdaBaixo) && !tab.existePecaPos(esquerdaBaixo)){
+            Jogada jogada = new Jogada(null, peca, posicaoPeca, esquerdaBaixo);
+            possiveisJogadas.add(jogada);
+            esquerdaBaixo = new Posicao(esquerdaBaixo.getI() +1, esquerdaBaixo.getJ() -1);
+        }
+        if(tab.posValida(esquerdaBaixo) && tab.existePecaPos(esquerdaBaixo)&& tab.getPeca(esquerdaBaixo).getTime()!= peca.getTime()){
+            Posicao comidaEsquerdaBaixo = new Posicao(esquerdaBaixo.getI() +1, esquerdaBaixo.getJ() -1);
+            if(tab.posValida(comidaEsquerdaBaixo) && !tab.existePecaPos(comidaEsquerdaBaixo)){
+                Jogada jogada = new Jogada(tab.getPeca(esquerdaBaixo), peca, posicaoPeca, comidaEsquerdaBaixo);
+                possiveisCapturas.add(jogada);
+            }
+        }
+        
+        while(tab.posValida(direitaCima) && !tab.existePecaPos(direitaCima)){
+            Jogada jogada = new Jogada(null, peca, posicaoPeca, direitaCima);
+            possiveisJogadas.add(jogada);
+            direitaCima = new Posicao(direitaCima.getI() -1, direitaCima.getJ() +1);
+        }
+        if(tab.posValida(direitaCima) && tab.existePecaPos(direitaCima)&& tab.getPeca(direitaCima).getTime()!= peca.getTime()){
+            Posicao comidadireitaCima = new Posicao(direitaCima.getI() -1, direitaCima.getJ() +1);
+            if(tab.posValida(comidadireitaCima) && !tab.existePecaPos(comidadireitaCima)){
+                Jogada jogada = new Jogada(tab.getPeca(direitaCima), peca, posicaoPeca, comidadireitaCima);
+                possiveisCapturas.add(jogada);
+            }
+        }
+        while(tab.posValida(direitaBaixo) && !tab.existePecaPos(direitaBaixo)){
+            Jogada jogada = new Jogada(null, peca, posicaoPeca, direitaBaixo);
+            possiveisJogadas.add(jogada);
+            direitaBaixo = new Posicao(direitaBaixo.getI() +1, direitaBaixo.getJ() +1);
+        }
+        if(tab.posValida(direitaBaixo) && tab.existePecaPos(direitaBaixo)&& tab.getPeca(direitaBaixo).getTime()!= peca.getTime()){
+            Posicao comidadireitaBaixo = new Posicao(direitaBaixo.getI() +1, direitaBaixo.getJ() +1);
+            if(tab.posValida(comidadireitaBaixo) && !tab.existePecaPos(comidadireitaBaixo)){
+                Jogada jogada = new Jogada(tab.getPeca(direitaBaixo), peca, posicaoPeca, comidadireitaBaixo);
+                possiveisCapturas.add(jogada);
+            }
+        }
+        
+        
+        return !possiveisCapturas.isEmpty() ? possiveisCapturas : possiveisJogadas;
     }
     
     void realizaMovimento(Tabuleiro tab, Jogada jogada){
