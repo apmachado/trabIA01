@@ -33,6 +33,9 @@ public class Tabuleiro {
     public Tabuleiro() {
         inicializaTabuleiro();
     }
+    public Tabuleiro(Peca[][] tabuleiro) {
+        this.tabuleiro = tabuleiro;
+    }
 
     private void inicializaTabuleiro() {
         tabuleiro = new Peca[DIMEN][DIMEN];
@@ -143,5 +146,24 @@ public class Tabuleiro {
         }
 
         return pecas;
+    }
+    
+    Tabuleiro copia() {
+        
+        Peca[][] tabuleiroPecas = new Peca[DIMEN][DIMEN];
+        for(int i = 0; i < DIMEN; i++){
+        
+            for(int j = 0; j < DIMEN; j++){
+                Peca original = tabuleiro[i][j];
+                if(original == null)
+                    tabuleiroPecas[i][j] = null;
+                else{
+                    Peca nova = new Peca(original.getTime(),original.isDama());
+                    tabuleiroPecas[i][j] = nova;
+                }            
+            }            
+        }        
+        
+        return new Tabuleiro(tabuleiroPecas);
     }
 }

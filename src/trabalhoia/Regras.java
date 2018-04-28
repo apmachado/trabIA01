@@ -268,5 +268,13 @@ public class Regras {
             }
         }
         return false;
+    }    ArrayList<Jogada> jogadasPossiveis(Tabuleiro tab, int time){
+        ArrayList<Jogada> possiveisJogadas = new ArrayList<>();
+        List<Peca> pecas = tab.getPecasJogador(time);
+        
+        pecas.forEach((peca) -> {
+            possiveisJogadas.addAll(possiveisJogadasPeca(tab, peca));
+        });
+        return possiveisJogadas;
     }
 }
