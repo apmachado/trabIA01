@@ -75,6 +75,7 @@ public class Regras {
             System.out.println("Nao existe movimento valido para essa peca,escolhe outra");
             return false;
         }
+          
         System.out.println("Sugestao de Jogadas");
         Jogada jogada;
         Posicao sugest;
@@ -87,7 +88,12 @@ public class Regras {
         só pecas que possuem captura podem ser selecionadas*/
         if(existePossibilidadeDeCaptura(tab, time)){
             ArrayList<Jogada> jogadas = possiveisJogadasPeca(tab, tab.getPeca(pos));
-            return jogadas.stream().anyMatch((jog) -> (jog.houveCaptura()));
+            if(jogadas.stream().anyMatch((jog) -> (jog.houveCaptura()))){
+                return jogadas.stream().anyMatch((jog) -> (jog.houveCaptura()));
+            }else{
+                 System.out.println("Vc eh obrigado a fazer a captura");
+                 return false;
+            }
         }
         return true;
     }
