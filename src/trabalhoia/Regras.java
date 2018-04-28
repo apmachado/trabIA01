@@ -48,7 +48,10 @@ public class Regras {
      * retorna o jogador vencedor caso tenha terminado
      */
     int jogoTerminou(Tabuleiro tab) {
-        
+        if(tab.getPecasJogador(1).isEmpty())
+            return 2;
+        if(tab.getPecasJogador(2).isEmpty())
+            return 1;
         return 0;
     }
     /**
