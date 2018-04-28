@@ -268,13 +268,17 @@ public class Regras {
             }
         }
         return false;
-    }    ArrayList<Jogada> jogadasPossiveis(Tabuleiro tab, int time){
+    }   
+    ArrayList<Jogada> jogadasPossiveis(Tabuleiro tab, int time){
         ArrayList<Jogada> possiveisJogadas = new ArrayList<>();
+        ArrayList<Jogada> possiveisJogadasPeca = new ArrayList<>();
         List<Peca> pecas = tab.getPecasJogador(time);
-        
-        pecas.forEach((peca) -> {
-            possiveisJogadas.addAll(possiveisJogadasPeca(tab, peca));
-        });
+        boolean existeCapturas = existePossibilidadeDeCaptura(tab, time);
+        for(Peca peca : pecas){
+            possiveisJogadasPeca = possiveisJogadasPeca(tab,peca);
+            if(!existeCapturas || possiveisJogadasPeca.get(0).houveCaptura())
+                possiveisJogadas.addAll(possiveisJogadasPeca);
+        }
         return possiveisJogadas;
     }
 }
