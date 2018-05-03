@@ -18,23 +18,7 @@ public class IA {
     int time;
     ArrayList<Jogada> proximaJogada;
     int MAX_ITE= 4;
-    
-        public static void desenhaTabuleiro(Tabuleiro tab){
-        int n;
-        for(int i=0; i< tab.DIMEN; i++){
-            for(int j=0;j<tab.DIMEN;j++){
-                Posicao pos = new Posicao(i,j);
-                if(tab.getPeca(pos)==null)
-                    n=0;
-                else if(tab.getPeca(pos).isDama())
-                    n = tab.getPeca(pos).getTime()==1 ? 3 : 4;
-                else
-                    n = tab.getPeca(pos).getTime();
-                System.out.print(n + " ");
-            }
-            System.out.println("");
-        }
-    }
+   
     
     public IA(Regras regras, Tabuleiro tab, int time){
         this.regras = regras;
@@ -43,12 +27,12 @@ public class IA {
     
     public void botJoga(Tabuleiro tabuleiro){
         Tabuleiro tab = tabuleiro.copia();
-        proximaJogada = null;
+        proximaJogada = new ArrayList<>();
         Random r = new Random();
-        Max(tab,Integer.MIN_VALUE, Integer.MAX_VALUE, time);
+        Max(tab,Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
         
         Jogada jogada = this.proximaJogada.get(r.nextInt(this.proximaJogada.size()));
-        regras.realizaMovimento(tabuleiro, jogada);
+        regras.realizaMovimentoBot(tabuleiro, jogada.getPosInicial() ,jogada.getPosFinal());
         
     }
 
@@ -56,16 +40,17 @@ public class IA {
         if(iteracao==MAX_ITE){
             return Utility(tab);
         }
-        int v = Integer.MIN_VALUE;      
-        ArrayList<Jogada> possiveisJogadas = regras.jogadasPossiveis(tab, time);
+        int v = Integer.MIN_VALUE;
+        ArrayList<Jogada> possiveisJogadas = regras.jogadasPossiveis(tab, this.time);
         for(Jogada jogada : possiveisJogadas){
             Tabuleiro tabIte = tab.copia();
             regras.realizaMovimentoBot(tabIte, jogada.getPosInicial(),jogada.getPosFinal());
             int vLinha = Min(tabIte, alpha, beta, iteracao+1);
             if(vLinha > v){
                 v = vLinha;
-                if(iteracao==1){
-                    this.proximaJogada.clear();
+                if(iteracao==0){
+                    if (!this.proximaJogada.isEmpty())
+                            this.proximaJogada.clear();
                     this.proximaJogada.add(jogada);
                 }
             }

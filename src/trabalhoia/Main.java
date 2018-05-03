@@ -14,6 +14,7 @@ public class Main {
     
     public static void desenhaTabuleiro(Tabuleiro tab){
         int n;
+        System.out.println("");
         for(int i=0; i< tab.DIMEN; i++){
             for(int j=0;j<tab.DIMEN;j++){
                 Posicao pos = new Posicao(i,j);

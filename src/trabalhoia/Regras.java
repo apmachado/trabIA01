@@ -235,8 +235,6 @@ public class Regras {
     }
     
     void realizaMovimento(Tabuleiro tab, Jogada jogada){
-        System.out.println("regra ta falando que eh a vez do time " + jogada.getPecaMovida().getTime());
-        
         tab.movePeca(jogada.getPecaMovida(), jogada.getPosFinal());
         if(jogada.getPosFinal().getI()==0&& jogada.getPecaMovida().getTime()==1 ||
                 jogada.getPosFinal().getI()==7&& jogada.getPecaMovida().getTime()==2)
@@ -280,7 +278,7 @@ public class Regras {
         boolean existeCapturas = existePossibilidadeDeCaptura(tab, time);
         for(Peca peca : pecas){
             possiveisJogadasPeca = possiveisJogadasPeca(tab,peca);
-            if(!existeCapturas || possiveisJogadasPeca.get(0).houveCaptura())
+            if(!existeCapturas || (!possiveisJogadasPeca.isEmpty() && possiveisJogadasPeca.get(0).houveCaptura()))
                 possiveisJogadas.addAll(possiveisJogadasPeca);
         }
         return possiveisJogadas;
