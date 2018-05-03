@@ -75,6 +75,24 @@ public class Tabuleiro {
         
         return pecas.size();
     }
+    public int nPecasNormalJogador(int time){
+        List<Peca> pecas = getPecasJogador(time);
+        int n=0;
+        for(Peca peca : pecas){
+            if(!peca.isDama())
+                n++;
+        }
+        return n;
+    }
+    public int nDamasJogador(int time){
+        List<Peca> pecas = getPecasJogador(time);
+        int n=0;
+        for(Peca peca : pecas){
+            if(peca.isDama())
+                n++;
+        }
+        return n;
+    }
     public Peca getPeca(Posicao posicao) {
         return tabuleiro[posicao.getI()][posicao.getJ()];
     }
