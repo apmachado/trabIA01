@@ -67,14 +67,14 @@ public class Main {
     
     public static int playerVsBot(Tabuleiro tab, Regras regras){
             int time, turno =1;
-            
+            IA bot = new IA(regras,tab, 2);
             while(regras.jogoTerminou(tab)==0){
                 time = turno%2==1 ? 1 : 2;
                 desenhaTabuleiro(tab);
                 if(time==1){
                     playerJoga(tab, regras, time);
                 }else{
-                    botJoga(tab, regras, time);
+                    bot.botJoga(tab);
                 }
                 turno++;
             }
