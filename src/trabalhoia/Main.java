@@ -5,8 +5,6 @@
  */
 package trabalhoia;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -30,9 +28,6 @@ public class Main {
         }
     }
     
-    private static void botJoga(Tabuleiro tab, Regras regras, int time) {
-    
-    }
     public static void playerJoga(Tabuleiro tab, Regras regras, int time){
         Scanner s = new Scanner(System.in);
         int i,j;

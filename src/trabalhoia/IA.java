@@ -17,7 +17,7 @@ public class IA {
     Regras regras;
     int time;
     ArrayList<Jogada> proximaJogada;
-    int MAX_ITE= 4;
+    int MAX_ITE= 6;
    
     
     public IA(Regras regras, Tabuleiro tab, int time){
@@ -33,6 +33,10 @@ public class IA {
         
         Jogada jogada = this.proximaJogada.get(r.nextInt(this.proximaJogada.size()));
         regras.realizaMovimentoBot(tabuleiro, jogada.getPosInicial() ,jogada.getPosFinal());
+      
+        System.out.println("Jogada do Bot: (" +
+                jogada.getPosInicial().getI() + ", " + jogada.getPosInicial().getJ() + ") -> ("+
+                jogada.getPosFinal().getI() + ", " + jogada.getPosFinal().getJ() + ")");
         
     }
 
@@ -46,16 +50,16 @@ public class IA {
             Tabuleiro tabIte = tab.copia();
             regras.realizaMovimentoBot(tabIte, jogada.getPosInicial(),jogada.getPosFinal());
             int vLinha = Min(tabIte, alpha, beta, iteracao+1);
+            
+            if(iteracao==0 && vLinha==v)
+                this.proximaJogada.add(jogada);
             if(vLinha > v){
                 v = vLinha;
                 if(iteracao==0){
-                    if (!this.proximaJogada.isEmpty())
-                            this.proximaJogada.clear();
+                    this.proximaJogada.clear();
                     this.proximaJogada.add(jogada);
                 }
-            }
-            if(iteracao==1 && vLinha==v)
-                this.proximaJogada.add(jogada);
+            }        
             if(vLinha>=beta)
                 return v;
             if(vLinha>alpha)
