@@ -71,6 +71,7 @@ public class Main {
                     playerJoga(tab, regras, time);
                 }else{
                     bot.botJoga(tab);
+                    System.out.println(bot.infoJogada);
                 }
                 turno++;
             }

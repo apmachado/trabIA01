@@ -18,6 +18,7 @@ public class IA {
     int time;
     ArrayList<Jogada> proximaJogada;
     int MAX_ITE= 6;
+    String infoJogada;
    
     
     public IA(Regras regras, Tabuleiro tab, int time){
@@ -34,9 +35,9 @@ public class IA {
         Jogada jogada = this.proximaJogada.get(r.nextInt(this.proximaJogada.size()));
         regras.realizaMovimentoBot(tabuleiro, jogada.getPosInicial() ,jogada.getPosFinal());
       
-        System.out.println("Jogada do Bot: (" +
+        this.infoJogada = "Jogada do Bot: (" +
                 jogada.getPosInicial().getI() + ", " + jogada.getPosInicial().getJ() + ") -> ("+
-                jogada.getPosFinal().getI() + ", " + jogada.getPosFinal().getJ() + ")");
+                jogada.getPosFinal().getI() + ", " + jogada.getPosFinal().getJ() + ")";
         
     }
 
