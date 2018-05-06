@@ -4,10 +4,7 @@
  * and open the template in the editor.
  */
 package trabalhoia;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,33 +12,6 @@ import java.util.List;
  * @author Joao
  */
 public class Regras {
-    /**
-     * Instancia do tabuleiro que vai ser regido pela Regras.
-     */
-    private Tabuleiro tabuleiro = new Tabuleiro();
-
-    /**
-     * Identificadores dos jogadores.
-     */
-    public static final int JOGADOR_UM = 1;
-    public static final int JOGADOR_DOIS = 2;
-    /**
-     * Jogador atual do turno.
-     */
-    private int jogadorAtual = JOGADOR_UM;
-
-    /**
-     * Numero de pecas de cada jogador.
-     */
-    private int nPecasJogador1 = 12;
-    private int nPecasJogador2 = 12;
-
-    private boolean jogoFinalizado;
-
-    private List<Jogada> historicoJogador1 = new ArrayList<>();
-    private List<Jogada> historicoJogador2 = new ArrayList<>();
-
-
     /**
      * funcao que verifica se o jogo terminou
      * retorna 0 caso nao tenha terminado
@@ -55,7 +25,7 @@ public class Regras {
         return 0;
     }
     /**
-     * 
+     * Verifica se a posicao inicial escolhida pelo jogador eh uma posicao valida
      * @param tab
      * @param pos
      * @param time
@@ -97,7 +67,7 @@ public class Regras {
         }
         return true;
     }
-
+    
     Jogada validaMovimento(Tabuleiro tab, Posicao posInicial, Posicao posFinal, int time) {
         if(!tab.posValida(posFinal)){
             System.out.println("posicao invalida");
@@ -257,8 +227,8 @@ public class Regras {
         Posicao pos;
         ArrayList<Jogada> possiveisJogadas = new ArrayList<>();
 
-        for(int i=0; i<tab.DIMEN;i++){
-            for(int j=0; j<tab.DIMEN;j++){
+        for(int i=0; i<Tabuleiro.DIMEN;i++){
+            for(int j=0; j<Tabuleiro.DIMEN;j++){
                 pos = new Posicao(i,j);
                 if(tab.existePecaPos(pos)&&tab.getPeca(pos).getTime()==time){
                     possiveisJogadas = possiveisJogadasPeca(tab, tab.getPeca(pos));
