@@ -17,10 +17,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Joao
- */
 public class Tabuleiro {
     public static final int DIMEN = 8;
     private Peca[][] tabuleiro;
