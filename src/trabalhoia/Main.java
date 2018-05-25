@@ -13,8 +13,9 @@ public class Main {
     public static void desenhaTabuleiro(Tabuleiro tab){
         int n;
         System.out.println("");
-        for(int i=0; i< tab.DIMEN; i++){
-            for(int j=0;j<tab.DIMEN;j++){
+        for(int i=0; i< Tabuleiro.DIMEN; i++){
+            System.out.print(8-i + " | ");
+            for(int j=0;j<Tabuleiro.DIMEN;j++){
                 Posicao pos = new Posicao(i,j);
                 if(tab.getPeca(pos)==null)
                     n=0;
@@ -26,25 +27,28 @@ public class Main {
             }
             System.out.println("");
         }
+        System.out.println("    A B C D E F G H");
     }
     
     public static void playerJoga(Tabuleiro tab, Regras regras, int time){
         Scanner s = new Scanner(System.in);
+        TradutorDeJogada tdj = new TradutorDeJogada();
         int i,j;
+        String entrada;
         Posicao posInicial, posFinal;
         do{
-            System.out.println("Escolha a peca que deseja mover (i j)");
-            i=s.nextInt();j=s.nextInt();
-            posInicial = new Posicao(i,j);
-            }while(!regras.validaPosicaoInicial(tab, posInicial, time));
+            System.out.println("Escolha a peca que deseja mover (Ex: A;0)");
+            entrada = s.nextLine();
+            posInicial = tdj.Traduz(entrada);
+            }while(posInicial== null || !regras.validaPosicaoInicial(tab, posInicial, time));
             do{
             System.out.println("Faca sua jogada (i j)");
-                i=s.nextInt();j=s.nextInt();
-                posFinal = new Posicao(i,j);
-                if(regras.validaMovimento(tab, posInicial, posFinal, time) == null){
+                entrada = s.nextLine();
+                posFinal = tdj.Traduz(entrada);
+                if(posFinal==null || regras.validaMovimento(tab, posInicial, posFinal, time) == null){
                     System.out.println("Jogada inválida, tenta de novo");
                 }
-            }while(regras.validaMovimento(tab, posInicial, posFinal, time)==null);
+            }while(posFinal==null || regras.validaMovimento(tab, posInicial, posFinal, time)==null);
             Jogada jogada = regras.validaMovimento(tab, posInicial, posFinal, time);
             regras.realizaMovimento(tab, jogada);          
     }

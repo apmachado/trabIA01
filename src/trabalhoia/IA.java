@@ -19,11 +19,13 @@ public class IA {
     ArrayList<Jogada> proximaJogada;
     int MAX_ITE= 6;
     String infoJogada;
+    TradutorDeJogada tdj;
    
     
     public IA(Regras regras, Tabuleiro tab, int time){
         this.regras = regras;
         this.time = time;
+        this.tdj = new TradutorDeJogada();
     }
     
     public void botJoga(Tabuleiro tabuleiro){
@@ -34,10 +36,10 @@ public class IA {
         
         Jogada jogada = this.proximaJogada.get(r.nextInt(this.proximaJogada.size()));
         regras.realizaMovimentoBot(tabuleiro, jogada.getPosInicial() ,jogada.getPosFinal());
-      
+        
         this.infoJogada = "Jogada do Bot: (" +
-                jogada.getPosInicial().getI() + ", " + jogada.getPosInicial().getJ() + ") -> ("+
-                jogada.getPosFinal().getI() + ", " + jogada.getPosFinal().getJ() + ")";
+                tdj.Traduz(jogada.getPosInicial()) + ") -> ("+
+                tdj.Traduz(jogada.getPosFinal());
         
     }
 

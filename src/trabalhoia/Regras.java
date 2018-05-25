@@ -18,9 +18,9 @@ public class Regras {
      * retorna o jogador vencedor caso tenha terminado
      */
     int jogoTerminou(Tabuleiro tab) {
-        if(tab.getPecasJogador(1).isEmpty())
+        if(tab.getPecasJogador(1).isEmpty()|| jogadasPossiveis(tab, 1)==null)
             return 2;
-        if(tab.getPecasJogador(2).isEmpty())
+        if(tab.getPecasJogador(2).isEmpty() || jogadasPossiveis(tab, 1)==null)
             return 1;
         return 0;
     }
@@ -52,7 +52,7 @@ public class Regras {
         for(int k = 0; k<possiveisJogadas.size(); k++){
             jogada = possiveisJogadas.get(k);
             sugest = jogada.getPosFinal();
-            System.out.println(sugest.toString());
+            System.out.println(new TradutorDeJogada().Traduz(sugest));
         }
         /*se existe possibilidade de captura no turno,
         só pecas que possuem captura podem ser selecionadas*/
