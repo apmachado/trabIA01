@@ -81,9 +81,7 @@ public class Main {
             }
             return regras.jogoTerminou(tab);
 }
-    
-    
-    
+   
     public static void main(String[] args) {
         Tabuleiro tabuleiro = new Tabuleiro();
         Regras regras = new Regras();

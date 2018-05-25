@@ -35,7 +35,7 @@ public class IA {
         Max(tab,Integer.MIN_VALUE, Integer.MAX_VALUE, 0);
         
         Jogada jogada = this.proximaJogada.get(r.nextInt(this.proximaJogada.size()));
-        regras.realizaMovimentoBot(tabuleiro, jogada.getPosInicial() ,jogada.getPosFinal());
+        regras.realizaMovimento(tabuleiro, jogada.getPosInicial() ,jogada.getPosFinal());
         
         this.infoJogada = "Jogada do Bot: (" +
                 tdj.Traduz(jogada.getPosInicial()) + ") -> ("+
@@ -51,7 +51,7 @@ public class IA {
         ArrayList<Jogada> possiveisJogadas = regras.jogadasPossiveis(tab, this.time);
         for(Jogada jogada : possiveisJogadas){
             Tabuleiro tabIte = tab.copia();
-            regras.realizaMovimentoBot(tabIte, jogada.getPosInicial(),jogada.getPosFinal());
+            regras.realizaMovimento(tabIte, jogada.getPosInicial(),jogada.getPosFinal());
             int vLinha = Min(tabIte, alpha, beta, iteracao+1);
             
             if(iteracao==0 && vLinha==v)
@@ -79,7 +79,7 @@ public class IA {
         ArrayList<Jogada> possiveisJogadas = regras.jogadasPossiveis(tab, 1);
         for(Jogada jogada : possiveisJogadas){
             Tabuleiro tabIte = tab.copia();
-            regras.realizaMovimentoBot(tabIte, jogada.getPosInicial(),jogada.getPosFinal());
+            regras.realizaMovimento(tabIte, jogada.getPosInicial(),jogada.getPosFinal());
             int vLinha = Max(tabIte, alpha, beta, iteracao+1);
             if(vLinha<v)
                 v = vLinha;

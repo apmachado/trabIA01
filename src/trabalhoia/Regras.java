@@ -212,7 +212,7 @@ public class Regras {
         if(jogada.houveCaptura())
             tab.removePeca(jogada.getPecaCapturada());
     }
-    void realizaMovimentoBot(Tabuleiro tab, Posicao posInicial, Posicao posFinal){
+    void realizaMovimento(Tabuleiro tab, Posicao posInicial, Posicao posFinal){
         Jogada jog = validaMovimento(tab, posInicial, posFinal, 2);
         realizaMovimento(tab, jog);
     }
