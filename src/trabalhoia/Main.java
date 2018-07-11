@@ -54,25 +54,25 @@ public class Main {
     }
     
     public static int playerVsPlayer(Tabuleiro tab, Regras regras){
-            int time, turno =1;
+            int time, turno =0;
             
             while(regras.jogoTerminou(tab)==0){
-                time = turno%2==1 ? 1 : 2;
+                time = turno%2;
                 desenhaTabuleiro(tab);
-                playerJoga(tab, regras, time);
+                playerJoga(tab, regras, time+1);
                 turno++;
             }
             return regras.jogoTerminou(tab);
 }
     
     public static int playerVsBot(Tabuleiro tab, Regras regras){
-            int time, turno =1;
+            int time, turno =0;
             IA bot = new IA(regras,tab, 2);
             while(regras.jogoTerminou(tab)==0){
-                time = turno%2==1 ? 1 : 2;
+                time = turno%2;
                 desenhaTabuleiro(tab);
-                if(time==1){
-                    playerJoga(tab, regras, time);
+                if(time==0){
+                    playerJoga(tab, regras, time+1);
                 }else{
                     bot.botJoga(tab);
                     System.out.println(bot.infoJogada);
