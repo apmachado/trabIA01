@@ -5,10 +5,7 @@
  */
 package trabalhoia;
 
-/**
- *
- * @author Joao
- */
+
 public class Jogada {
     private Peca pecaCapturada;
     private Peca pecaMovida;

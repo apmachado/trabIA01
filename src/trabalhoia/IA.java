@@ -9,10 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- *
- * @author Joao
- */
+
 public class IA {
     Regras regras;
     int time;

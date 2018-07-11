@@ -5,10 +5,6 @@
  */
 package trabalhoia;
 
-/**
- *
- * @author Joao
- */
 public class Peca {
     
     private int time;

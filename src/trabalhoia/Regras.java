@@ -7,10 +7,6 @@ package trabalhoia;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Joao
- */
 public class Regras {
     /**
      * funcao que verifica se o jogo terminou
